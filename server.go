@@ -698,7 +698,7 @@ func (s *Server) Bootstrap() (ts TraversalStats, err error) {
 	triedAddrs := newBloomFilterForTraversal()
 	var onAddr func(addr Addr)
 	onAddr = func(addr Addr) {
-		if triedAddrs.Test([]byte(addr.String())) {
+		if triedAddrs.Test([]byte(addr.String())) && ts.NumAddrsTried >= 100 {
 			return
 		}
 		ts.NumAddrsTried++
